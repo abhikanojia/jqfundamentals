@@ -50,4 +50,33 @@ $(document).ready(function(){
   var firstListItem = $("#slideshow > li:nth-child(1)");
   firstListItem.addClass(className);
   firstListItem.siblings().addClass("disabled");
+
+
+  // Exercise 2.3
+
+  // Add five new list items to the end of the unordered list #myList.
+  var ul = $("#myList");
+  for (var i = 7; i <= 12; i++) {
+    var li = "<li> List Item " + i + "</li>";
+    ul.append(li);
+  }
+
+  var listItemsOdd = ul.children(":nth-child(odd)");
+  listItems.remove();
+
+  // Add another h2 and another paragraph to the last div.module
+  var lastDiv = $("div.module:last");
+  lastDiv.append("<h2> Another Heading </h2>");
+  lastDiv.append("<p>Here is another paragraph. </p>");
+
+  // Add another option to the select element; give the option the value "Wednesday"
+  select.append("<option>Wednesday</option>");
+
+  // Add a new div.module to the page after the last one; put a copy of one of the existing images inside of it.
+  var image = $("img:first");
+  var mainDiv = $("#main");
+  mainDiv.append("<div class='module'></div>");
+
+  var lastDiv = $("div.module:last");
+  lastDiv.append(image);
 });
