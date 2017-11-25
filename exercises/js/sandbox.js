@@ -10,7 +10,7 @@ $(document).ready(function(){
   var thirdListItem = $("ul > li:nth-child(3)");
 
   // Select the label for the search input using an attribute selector.
-  var label = $("label:contains('Text input')");
+  var label = $("label[for=q]");
 
   // Figure out how many elements on the page are hidden
   var hiddenElementsCount = $(":hidden").size();
