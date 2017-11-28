@@ -25,10 +25,8 @@ $(document).ready(function(){
   // Exercise 2.2
 
   // Select all of the image elements on the page; log each image's alt attribute.
-  var images = $("img");
-
-  $.each(images, function(index, image){
-    console.log(image.alt);
+  $("img").each(function(){
+    console.log(this.alt);
   });
 
   // Select the search input text box, then traverse up to the form and add a class to the form.
