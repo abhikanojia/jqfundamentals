@@ -61,22 +61,17 @@ $(document).ready(function(){
     ul.append(li);
   }
 
-  var listItemsOdd = ul.children(":nth-child(odd)");
-  listItems.remove();
+  $("#myList li:odd").remove();
 
   // Add another h2 and another paragraph to the last div.module
-  var lastDiv = $("div.module:last");
-  lastDiv.append("<h2> Another Heading </h2>");
-  lastDiv.append("<p>Here is another paragraph. </p>");
+  $("div.module:last")
+  .append("<h2> Another Heading </h2>");
+  .append("<p>Here is another paragraph. </p>");
 
   // Add another option to the select element; give the option the value "Wednesday"
-  select.append("<option>Wednesday</option>");
+  $("select[name=day]").append("<option>Wednesday</option>");
 
   // Add a new div.module to the page after the last one; put a copy of one of the existing images inside of it.
-  var image = $("img:first");
-  var mainDiv = $("#main");
-  mainDiv.append("<div class='module'></div>");
-
-  var lastDiv = $("div.module:last");
-  lastDiv.append(image);
+  $("#main").append("<div class='module'></div>");
+  $("img:first").clone().appendTo('div.module:last');
 });
