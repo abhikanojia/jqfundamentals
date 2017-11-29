@@ -60,7 +60,7 @@ $(document).ready(function(){
   .append("<p>Here is another paragraph. </p>");
 
   // Add another option to the select element; give the option the value "Wednesday"
-  $("select[name=day]").append("<option>Wednesday</option>");
+  $("select[name=day]").append("<option value='wednesday'>Wednesday</option>");
 
   // Add a new div.module to the page after the last one; put a copy of one of the existing images inside of it.
   $("#main").append("<div class='module'></div>");
