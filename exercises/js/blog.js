@@ -7,13 +7,11 @@ function Accordion(data) {
 
 Accordion.prototype.init = function() {
   var _this = this;
-  this.headings.each(function(index, element){
-    $(element).bind('click', function(event){
-      event.preventDefault();
-      var heading = $(this);
-      heading.siblings(_this.toggleElementClass).slideToggle();
-      heading.parent('li').siblings().find(_this.toggleElementClass).slideUp();
-    });
+  this.headings.bind('click', function(event){
+    event.preventDefault();
+    var heading = $(this);
+    heading.siblings(_this.toggleElementClass).slideToggle();
+    heading.parent('li').siblings().find(_this.toggleElementClass).slideUp();
   });
 };
 
