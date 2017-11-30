@@ -1,25 +1,25 @@
 function Accordion(data) {
-  this.div = data.div;
-  this.bindEventTo = data.bindEventTo;
+  this.accordionContainer = data.accordionContainer;
+  this.headings = data.headings;
   this.toggleElementClass = data.toggleElementClass;
 }
 
 
 Accordion.prototype.init = function() {
   var _this = this;
-  this.bindEventTo.each(function(index, element){
+  this.headings.each(function(index, element){
     $(element).bind('click', function(event){
       event.preventDefault();
-      var h3 = $(this);
-      h3.siblings(_this.toggleElementClass).slideToggle();
-      h3.parent().siblings().find(_this.toggleElementClass).slideUp();
+      var heading = $(this);
+      heading.siblings(_this.toggleElementClass).slideToggle();
+      heading.parent('li').siblings().find(_this.toggleElementClass).slideUp();
     });
   });
 };
 
 var data = {
-  div: $('#blog'),
-  bindEventTo: $("#blog").find('h3'),
+  accordionContainer: $('#blog'),
+  headings: $("#blog").find('h3'),
   toggleElementClass: 'p.excerpt'
 };
 
