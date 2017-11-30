@@ -25,4 +25,3 @@ var data = {
 
 var accordion = new Accordion(data);
 accordion.init();
-console.log(accordion);
