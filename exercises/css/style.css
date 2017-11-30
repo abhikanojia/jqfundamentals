@@ -52,6 +52,13 @@ a:visited {
 	display: none;
 }
 
+.active {
+	display: block;
+}
+
+.inactive {
+	display: none;
+}
 /* forms */
 
 form li {
@@ -325,5 +332,5 @@ margin: 15px 0;
 	height: 10000px;
 	background-color: #333;
 	z-index: 100;
-	
+
 }
