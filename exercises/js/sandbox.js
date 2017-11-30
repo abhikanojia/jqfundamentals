@@ -36,7 +36,7 @@ $(document).ready(function(){
   $("li.current").removeClass('current').next().addClass('current');
 
   // Select the select element inside #specials; traverse your way to the submit button.
-  $("#specials > form > ul > li:nth-child(1) > select[name=day]").closest('ul').find('input:submit');
+  $("div#specials select[name=day]").parent('ul').find('input:submit');
 
   // Select the first list item in the #slideshow element; add the class "current" to it, and then add a class of "disabled" to its sibling elements.
 
