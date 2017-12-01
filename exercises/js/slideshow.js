@@ -1,48 +1,77 @@
-function Slider(data) {
-  this.slideShowContainer = data.slideShowContainer;
-  this.pageBody = data.pageBody;
-  this.sliderItems = data.sliderItems;
-  this.countItems = this.sliderItems.length;
-  this.startElement = data.startElement;
-  this.hideClass = data.hideClass;
-  this.interval = data.interval;
-  this.activeClass = data.activeClass;
+function Slider(options) {
+  this.loop = options.loop;
+  this.delay = options.delay;
+  this.speed = options.speed;
+  this.sliderItems = options.sliderItems;
+  this.mainContainer = options.mainContainer;
+  this.sliderLength = this.sliderItems.length;
+  this.sliderContainer = options.sliderContainer;
 }
 
-Slider.prototype.showNext = function(currentElement) {
-
+Slider.prototype.getNext = function(current) {
+  if( (current + 1) == this.sliderLength) {
+    return 0;
+  } else {
+    return current + 1;
+  }
 };
 
-Slider.prototype.start = function() {
-  var _this = this;
-  setInterval(function(){
+Slider.prototype.updateStatus = function(value) {
+  $('.count').text(value + 1);
+};
 
-    // $(_this.sliderItems[currentElement++]).fadeOut(3000, function(){
-    //   $(_this.sliderItems[currentElement]).fadeIn(3000);
-    // });
-  },this.interval);
+Slider.prototype.changeImage = function(current) {
+  var _this = this;
+  var nextElement = this.getNext(current);
+  setTimeout(function(){
+    $(_this.sliderItems[current]).fadeOut(_this.speed,function(){
+      _this.updateStatus(current);
+      $(_this.sliderItems[nextElement]).fadeIn(_this.speed / 2);
+    });
+    current = nextElement;
+    _this.changeImage(current);
+  }, this.delay);
+};
+
+Slider.prototype.appendTotalCount = function() {
+  var text = $('.sliderstatus > .total').text();
+  $('.sliderstatus > .total').text(text + this.sliderLength);
+};
+
+Slider.prototype.appendStatus = function() {
+  $('<div/>', {
+    class: 'sliderstatus',
+    text: 'Showing: '
+  }).insertAfter(this.sliderContainer);
+
+  $('<span/>', {
+    class: 'count'
+  }).appendTo('.sliderstatus');
+
+  $('<span/>',{
+    class: 'total',
+    text: ' Out of '
+  }).appendTo('.sliderstatus');
 };
 
 Slider.prototype.init = function() {
-  var slideShow = this.slideShowContainer.remove();
-  $(this.pageBody).prepend(slideShow);
-  $(this.startElement)
-  .addClass(this.activeClass)
-  .nextAll().addClass(this.hideClass);
-
-  this.start();
+  var current = 0;
+  $(this.sliderContainer).prependTo(this.mainContainer);
+  $(this.sliderItems[current]).nextAll().hide();
+  this.changeImage(current);
+  this.appendStatus();
+  this.appendTotalCount();
+  this.updateStatus(current);
 };
 
-var data = {
-  slideShowContainer: $("ul#slideshow"),
-  pageBody: $('body'),
-  startElement: $("ul#slideshow > li:first"),
-  sliderItems: $("ul#slideshow > li"),
-  hideClass: 'inactive',
-  interval: 5000,
-  activeClass: 'active'
-};
+var options = {
+  delay: 5000,
+  speed: 3000,
+  mainContainer: $("#main"),
+  sliderContainer: $("[data-slider=slideshow]"),
+  sliderItems: $("[data-slider=slideshow] > li")
+}
 
-var slideshow = new Slider(data);
-slideshow.init();
-console.log(slideshow);
+var slider = new Slider(options);
+slider.init();
+console.log(slider);
