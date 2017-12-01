@@ -74,4 +74,3 @@ var options = {
 
 var slider = new Slider(options);
 slider.init();
-console.log(slider);
