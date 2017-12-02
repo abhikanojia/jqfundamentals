@@ -61,5 +61,4 @@ var data = {
 };
 
 var specials = new Specials(data);
-console.log(specials);
 specials.init();
