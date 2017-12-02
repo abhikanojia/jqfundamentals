@@ -1,0 +1,24 @@
+.mid{
+  width: 90%;
+  margin-left: 40px;
+  padding: 15px 20px;
+  float: left;
+}
+.floating-box {
+  float: left;
+  width: 48%;
+  margin: 10px;
+}
+.left{
+  border:1px solid black;
+}
+.small{
+  border: 1px solid black;
+  width: 90%;
+  display: block;
+  padding: 10px 10px;
+  text-align: center;
+  margin: 0 auto;
+  margin-top:10px;
+  margin-bottom:10px;
+}
