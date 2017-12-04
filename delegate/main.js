@@ -19,8 +19,8 @@ DivStack.prototype.isFirstChild = function(target) {
 
 DivStack.prototype.addEventToDiv = function(div) {
   var _this = this;
-  $(div).on('click', function(e){
-    if(_this.isFirstChild(e.target)) {
+  $(div).on('click', function(event){
+    if(_this.isFirstChild(event.target)) {
       $(this).remove();
     } else {
       $(this).css({background: _this.changeBackground})
