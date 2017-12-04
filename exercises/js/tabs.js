@@ -1,7 +1,8 @@
 function TabNaviation(data) {
+  this.ul = data.ul;
+  this.className = data.className;
   this.divModules = data.divModules;
   this.firstDivModule = data.firstDivModule;
-  this.ul = data.ul;
 }
 
 TabNaviation.prototype.getDiv = function(id) {
@@ -12,9 +13,6 @@ TabNaviation.prototype.getId = function(id) {
   return "#".concat(id);
 };
 
-TabNaviation.prototype.hideDivSiblings = function(id) {
-  $(this.getDiv(id)).siblings().hide();
-};
 
 TabNaviation.prototype.createList = function(headings) {
   var _this = this;
@@ -23,10 +21,13 @@ TabNaviation.prototype.createList = function(headings) {
       .appendTo(_this.ul)
       .bind('click', function(){
         var idString = $(this).text().toLowerCase();
-        $(this).toggleClass('current');
-        $(this).siblings().removeClass('current');
-        $(_this.getDiv(idString)).toggle();
-        $(_this.getDiv(idString)).siblings('.module').hide();
+
+        $(this).toggleClass(_this.className)
+          .siblings()
+          .removeClass(_this.className);
+        $(_this.getDiv(idString)).toggle()
+          .siblings('.module')
+          .hide();
       });
   });
 };
@@ -52,9 +53,10 @@ TabNaviation.prototype.init = function() {
 
 $(document).ready(function(){
   var data = {
+    ul: '<ul></ul>',
+    className: 'current',
     divModules: $('div.module'),
     firstDivModule: $('div.module:first'),
-    ul: '<ul></ul>'
   };
   var tabs = new TabNaviation(data);
   tabs.init();
