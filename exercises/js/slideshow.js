@@ -9,11 +9,7 @@ function Slider(options) {
 }
 
 Slider.prototype.getNext = function(current) {
-  if( (current + 1) == this.sliderLength) {
-    return 0;
-  } else {
-    return current + 1;
-  }
+  return ((current + 1) == this.sliderLength) ? 0 : (current + 1);
 };
 
 Slider.prototype.updateStatus = function(value) {
@@ -56,21 +52,23 @@ Slider.prototype.appendStatus = function() {
 
 Slider.prototype.init = function() {
   var current = 0;
-  $(this.sliderContainer).prependTo(this.mainContainer);
-  $(this.sliderItems[current]).nextAll().hide();
+  this.sliderContainer.prependTo(this.mainContainer);
+  this.sliderItems.eq(current).nextAll().hide();
   this.changeImage(current);
   this.appendStatus();
   this.appendTotalCount();
   this.updateStatus(current);
 };
 
-var options = {
-  delay: 5000,
-  speed: 3000,
-  mainContainer: $("#main"),
-  sliderContainer: $("[data-slider=slideshow]"),
-  sliderItems: $("[data-slider=slideshow] > li")
-}
+$(document).ready(function(){
+  var options = {
+    delay: 5000,
+    speed: 3000,
+    mainContainer: $("#main"),
+    sliderContainer: $("[data-slider=slideshow]"),
+    sliderItems: $("[data-slider=slideshow] > li")
+  }
 
-var slider = new Slider(options);
-slider.init();
+  var slider = new Slider(options);
+  slider.init();
+});
