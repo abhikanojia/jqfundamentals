@@ -55,13 +55,15 @@ DivStack.prototype.init = function() {
   });
 };
 
-var data = {
-  container: $('.left'),
-  divClass: 'small',
-  addButton: $('[data-trigger=add]'),
-  defaultBackground: 'white',
-  changeBackground: 'cyan'
-};
+$(document).ready(function(){
+  var data = {
+    container: $('.left'),
+    divClass: 'small',
+    addButton: $('[data-trigger=add]'),
+    defaultBackground: 'white',
+    changeBackground: 'cyan'
+  };
 
-var stack = new DivStack(data);
-stack.init();
+  var stack = new DivStack(data);
+  stack.init();
+});
