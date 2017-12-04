@@ -6,18 +6,11 @@ function DivStack(data) {
   this.changeBackground = data.changeBackground;
 }
 
-DivStack.prototype.appendBeforeFirstDiv = function(firstDiv) {
-  return $('<div/>', {
+DivStack.prototype.createDiv = function(text) {
+  return $('<div/>',{
     class: this.divClass,
-    text: parseInt(firstDiv.text()) + 1
-  }).insertBefore(firstDiv);
-};
-
-DivStack.prototype.appendFirstDiv = function() {
-  return $('<div/>', {
-    class: this.divClass,
-    text: 1
-  }).appendTo(this.container);
+    text: text
+  });
 };
 
 DivStack.prototype.isFirstChild = function(target) {
@@ -30,8 +23,9 @@ DivStack.prototype.addEventToDiv = function(div) {
     if(_this.isFirstChild(e.target)) {
       $(this).remove();
     } else {
-      $(this).css({background: _this.changeBackground}).siblings()
-      .css({background: _this.defaultBackground});
+      $(this).css({background: _this.changeBackground})
+        .siblings()
+        .css({background: _this.defaultBackground});
     }
   });
 };
@@ -40,10 +34,12 @@ DivStack.prototype.addEventToDiv = function(div) {
 DivStack.prototype.appendNewDiv = function() {
   var newDiv;
   var firstDiv = $(this.container).find('div:first');
+
   if(firstDiv.length == 1) {
-    newDiv = this.appendBeforeFirstDiv(firstDiv);
+    var text = parseInt(firstDiv.text()) + 1;
+    newDiv = this.createDiv(text).insertBefore(firstDiv);
   } else {
-    newDiv = this.appendFirstDiv();
+    newDiv = this.createDiv(firstDiv.length).appendTo(this.container);
   }
   this.addEventToDiv(newDiv);
 };
