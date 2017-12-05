@@ -7,14 +7,14 @@ function TabNaviation(data) {
 TabNaviation.prototype.createList = function() {
   var _this = this;
   this.divModules.each(function(){
-    var $this = this;
-    var heading = $($this).find('h2').text().toLowerCase();
+    var currentDiv = $(this);
+    var heading = currentDiv.find('h2').text().toLowerCase();
     $(_this.newListItem(heading)).appendTo(_this.ul)
       .on('click', function(){
         $(this).toggleClass(_this.className)
           .siblings()
           .removeClass(_this.className);
-        $($this).toggle()
+        currentDiv.toggle()
           .siblings('.module')
           .hide();
       });
