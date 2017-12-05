@@ -30,7 +30,6 @@ DivStack.prototype.addEventToDiv = function(div) {
   });
 };
 
-
 DivStack.prototype.appendNewDiv = function() {
   var newDiv;
   var firstDiv = $(this.container).find('div:first');
