@@ -1,11 +1,11 @@
 function Specials(data) {
-  this.jsonFile = data.jsonFile;
-  this.selectElement = data.selectElement;
-  this.formContainer = data.formContainer;
   this.cache = data.cache;
-  this.submitBtn = data.submitBtn;
   this.status = data.status;
+  this.jsonFile = data.jsonFile;
   this.statusFields = data.statusFields;
+  this.formContainer = data.formContainer;
+  this.submitBtn = this.formContainer.find('input:submit');
+  this.selectElement = this.formContainer.find('select[name=day]');
 }
 
 Specials.prototype.getDataFromJson = function() {
@@ -44,21 +44,21 @@ Specials.prototype.init = function() {
   });
 };
 
-var statusFields = {
-  text: '.text',
-  title: '.title',
-  image: '.image'
-};
+$(document).ready(function(){
+  var statusFields = {
+    text: '.text',
+    title: '.title',
+    image: '.image'
+  };
 
-var data = {
-  cache: {},
-  jsonFile: 'data/specials.json',
-  selectElement: $('#specials select[name=day]'),
-  formContainer: $("#specials"),
-  status: $('.specialsdata'),
-  submitBtn: $("#specials input:submit"),
-  statusFields: statusFields
-};
+  var data = {
+    cache: {},
+    jsonFile: 'data/specials.json',
+    formContainer: $("#specials"),
+    status: $('.specialsdata'),
+    statusFields: statusFields
+  };
 
-var specials = new Specials(data);
-specials.init();
+  var specials = new Specials(data);
+  specials.init();
+});
