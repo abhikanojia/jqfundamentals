@@ -25,18 +25,20 @@ LoadContent.prototype.loadData = function(element) {
 LoadContent.prototype.init = function() {
   var _this = this;
   this.addReference();
-  this.headings.bind('click', function(event){
+  this.headings.on('click', function(event){
     event.preventDefault();
     _this.loadData(this);
   })
 };
 
+$(document).ready(function(){
+  var data = {
+    filePath: 'data/blog.html',
+    headings: $('#blog').find('h3'),
+    attribute: 'data-target'
+  };
 
-var data = {
-  filePath: 'data/blog.html',
-  headings: $('#blog').find('h3'),
-  attribute: 'data-target'
-};
+  var loadContent = new LoadContent(data);
+  loadContent.init();
 
-var loadContent = new LoadContent(data);
-loadContent.init();
+});
