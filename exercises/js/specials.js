@@ -1,64 +1,73 @@
-function Specials(data) {
-  this.cache = data.cache;
-  this.status = data.status;
+function SpecialOffer(data) {
+  this.cache = {};
   this.jsonFile = data.jsonFile;
-  this.statusFields = data.statusFields;
   this.formContainer = data.formContainer;
+  this.offerContainerSelector = data.offerContainerSelector;
   this.submitBtn = this.formContainer.find('input:submit');
   this.selectElement = this.formContainer.find('select[name=day]');
 }
 
-Specials.prototype.getDataFromJson = function() {
+SpecialOffer.prototype.cacheDataFromJson = function() {
   var _this = this;
   $.getJSON(this.jsonFile, function(response){
     _this.cache = response;
   });
 };
 
+SpecialOffer.prototype.showOffer = function(key, $offercontainer) {
+  var image = this.cache[key].image.substr(1, this.cache[key].image.length);
+  $offercontainer.show()
+    .find('h3').text(this.cache[key].title);
+  $offercontainer.find('p').text(this.cache[key].text);
+  $offercontainer.find('img').attr('src', image);
+  $offercontainer.find('p').css({color: this.cache[key].color});
+};
 
-Specials.prototype.getData = function(key) {
-  var $status = $(this.status);
+SpecialOffer.prototype.getData = function(key) {
+  var $offercontainer = $(this.offerContainerSelector);
   if(key) {
-    $status.show();
-    var image = this.cache[key].image.substr(1, this.cache[key].image.length);
-    $status.find(this.statusFields.title).text(this.cache[key].title);
-    $status.find(this.statusFields.text).text(this.cache[key].text);
-    $status.find(this.statusFields.image).attr('src', image);
-    $status.find(this.statusFields.title).css({color: this.cache[key].color});
+    this.showOffer(key, $offercontainer);
   } else {
-    $status.hide();
+    $offercontainer.hide();
   }
 };
 
-Specials.prototype.hideButton = function() {
+SpecialOffer.prototype.hideButton = function() {
   this.submitBtn.parent('li').hide();
 };
 
+SpecialOffer.prototype.createElement = function(type) {
+  return $(type);
+};
 
-Specials.prototype.init = function() {
+SpecialOffer.prototype.appendOfferContainer = function() {
+  $('<div/>', {
+    class: 'special'
+  }).insertAfter(this.formContainer)
+  .append(this.createElement('<h3/>'))
+  .append(this.createElement('<p/>'))
+  .append(this.createElement('<img/>'));
+};
+
+SpecialOffer.prototype.init = function() {
   var _this = this;
   this.hideButton();
-  this.getDataFromJson();
+  this.cacheDataFromJson();
+  this.appendOfferContainer();
   this.selectElement.bind('change', function(){
     _this.getData(this.value);
   });
 };
 
 $(document).ready(function(){
-  var statusFields = {
-    text: '.text',
-    title: '.title',
-    image: '.image'
-  };
+  var JSON_FILE = 'data/specials.json';
 
   var data = {
-    cache: {},
-    jsonFile: 'data/specials.json',
+    jsonFile: JSON_FILE,
     formContainer: $("#specials"),
-    status: $('.specialsdata'),
-    statusFields: statusFields
+    offerContainerSelector: '.special'
   };
 
-  var specials = new Specials(data);
+  var specials = new SpecialOffer(data);
   specials.init();
 });
