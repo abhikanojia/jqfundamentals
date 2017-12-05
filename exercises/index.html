@@ -11,6 +11,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<style>
 	#blog p.excerpt { display: none; }
+	#top { display: none; }
+	.sliderstatus { margin-top: 363px; }
 	</style>
 
 </head>
@@ -32,7 +34,8 @@
 	</div>
 
 	<div id="main">
-		<form id="search">
+		<div id="top">
+			<form id="search">
 			<label for="q">Enter search term</label>
 			<input type="text" name="q" class="input_text" />
 			<input type="submit" value="Go" />
@@ -40,6 +43,7 @@
 
 		<h1>Eat here.</h1>
 		<p>Lorem ipsum dolor sit amet, <a href="foo.html">consectetur adipisicing elit</a>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		</div>
 
 		<ul id="slideshow" data-slider="slideshow">
 			<li>
@@ -153,12 +157,12 @@
 
 	</div>
 
-<script src="js/inputHint.js"></script>
 <script src="js/navigation.js"></script>
 <!-- <script src="js/sandbox.js"></script> -->
 <script src="js/tabs.js"></script>
 <script src="js/slideshow.js"></script>
 <!--
+<script src="js/inputHint.js"></script>
 <script src="js/load.js"></script>
 <script src="js/blog.js"></script>
 <script src="js/specials.js"></script>

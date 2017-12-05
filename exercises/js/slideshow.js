@@ -22,8 +22,8 @@ Slider.prototype.changeImage = function(current) {
   setTimeout(function(){
     $(_this.sliderItems[current]).fadeOut(_this.speed, function(){
       _this.updateStatus(current);
-      $(_this.sliderItems[nextElement]).fadeIn(_this.speed / 2);
     });
+    $(_this.sliderItems[nextElement]).fadeIn(_this.speed / 2);
     current = nextElement;
     _this.changeImage(current);
   }, this.delay);

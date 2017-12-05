@@ -216,7 +216,7 @@ body {
 }
 
 #slideshow li {
-	margin: 0 0 10px 0;
+	position: absolute;
 	list-style-type: none;
 }
 
