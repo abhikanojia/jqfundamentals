@@ -4,50 +4,52 @@ function Slider(options) {
   this.speed = options.speed;
   this.sliderItems = options.sliderItems;
   this.mainContainer = options.mainContainer;
-  this.sliderLength = this.sliderItems.length;
   this.sliderContainer = options.sliderContainer;
 }
 
 Slider.prototype.getNext = function(current) {
-  return ((current + 1) == this.sliderLength) ? 0 : (current + 1);
+  return ((current + 1) == this.sliderItems.length) ? 0 : (current + 1);
 };
 
 Slider.prototype.updateStatus = function(value) {
-  $('.count').text(value + 1);
+  this.currentSlide.text(value + 1);
 };
 
 Slider.prototype.changeImage = function(current) {
   var _this = this;
   var nextElement = this.getNext(current);
   setTimeout(function(){
-    $(_this.sliderItems[current]).fadeOut(_this.speed, function(){
-      _this.updateStatus(current);
+    $(_this.sliderItems[current]).fadeOut(_this.speed);
+    $(_this.sliderItems[nextElement]).fadeIn(_this.speed / 2, function(){
     });
-    $(_this.sliderItems[nextElement]).fadeIn(_this.speed / 2);
-    current = nextElement;
-    _this.changeImage(current);
+    _this.changeImage(nextElement);
+    _this.updateStatus(nextElement);
   }, this.delay);
 };
 
 Slider.prototype.appendTotalCount = function() {
-  var text = $('.sliderstatus > .total').text();
-  $('.sliderstatus > .total').text(text + this.sliderLength);
+  this.totalSlides.text(this.sliderItems.length);
 };
 
 Slider.prototype.appendStatus = function() {
-  $('<div/>', {
+  var sliderStatus = $('<div/>', {
     class: 'sliderstatus',
     text: 'Showing: '
   }).insertAfter(this.sliderContainer);
 
-  $('<span/>', {
+  this.currentSlide = $('<span/>', {
     class: 'count'
-  }).appendTo('.sliderstatus');
+  }).appendTo(sliderStatus);
 
   $('<span/>',{
     class: 'total',
     text: ' Out of '
-  }).appendTo('.sliderstatus');
+  }).appendTo(sliderStatus);
+
+  this.totalSlides = $('<span/>', {
+    class: 'totalslides'
+  }).appendTo(sliderStatus);
+
 };
 
 Slider.prototype.init = function() {
