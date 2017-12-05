@@ -16,8 +16,7 @@ SpecialOffer.prototype.cacheDataFromJson = function() {
 
 SpecialOffer.prototype.showOffer = function(key, $offercontainer) {
   var image = this.cache[key].image.substr(1, this.cache[key].image.length);
-  $offercontainer.show()
-    .find('h3').text(this.cache[key].title);
+  $offercontainer.show().find('h3').text(this.cache[key].title);
   $offercontainer.find('p').text(this.cache[key].text);
   $offercontainer.find('img').attr('src', image);
   $offercontainer.find('p').css({color: this.cache[key].color});
