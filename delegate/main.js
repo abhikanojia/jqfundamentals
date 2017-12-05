@@ -21,9 +21,9 @@ DivStack.prototype.addEventToDiv = function(div) {
   var _this = this;
   $(div).on('click', function(event){
     if(_this.isFirstChild(event.target)) {
-      $(this).remove();
+      $(event.target).remove();
     } else {
-      $(this).css({background: _this.changeBackground})
+      $(event.target).css({background: _this.changeBackground})
         .siblings()
         .css({background: _this.defaultBackground});
     }
@@ -41,10 +41,10 @@ DivStack.prototype.appendNewDiv = function() {
   } else {
     newDiv = this.createDiv(firstDiv.length).appendTo(this.container);
   }
-  this.addEventToDiv(newDiv);
 };
 
 DivStack.prototype.init = function() {
+  this.addEventToDiv(this.container);
   var _this = this;
   this.addButton.bind('click', function(){
     _this.appendNewDiv();
