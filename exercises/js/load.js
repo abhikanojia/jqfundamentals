@@ -4,22 +4,21 @@ function LoadContent(data) {
   this.attribute = data.attribute;
 }
 
-
 LoadContent.prototype.getTarget = function(element) {
-  var href = $(element).find('a').attr('href');
+  var href = element.find('a').attr('href');
   return href.substr(href.indexOf('#'));
 };
 
 LoadContent.prototype.addReference = function() {
   var _this = this;
   this.headings.each(function(){
-    $('<div/>').insertAfter(this).attr(_this.attribute, _this.getTarget(this));
+    $('<div/>').insertAfter(this).attr(_this.attribute, _this.getTarget($(this)));
   });
 };
 
 LoadContent.prototype.loadData = function(element) {
-  var container = $(element).next('div[data-target]');
-  $(container).load(this.filePath + " " + $(container).data('target'));
+  var container = element.next('div[data-target]');
+  container.load(this.filePath + " " + container.data('target'));
 };
 
 LoadContent.prototype.init = function() {
@@ -27,7 +26,7 @@ LoadContent.prototype.init = function() {
   this.addReference();
   this.headings.on('click', function(event){
     event.preventDefault();
-    _this.loadData(this);
+    _this.loadData($(this));
   })
 };
 
@@ -40,5 +39,4 @@ $(document).ready(function(){
 
   var loadContent = new LoadContent(data);
   loadContent.init();
-
 });
