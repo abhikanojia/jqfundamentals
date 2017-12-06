@@ -15,7 +15,7 @@ DivStack.prototype.createDiv = function(text) {
 };
 
 DivStack.prototype.isFirstChild = function(target) {
-  return $(target).is($(target).parent().children('div').first());
+  return $(target).is($(target).parent().children(this.divSmall).first());
 };
 
 DivStack.prototype.addEventToDiv = function(container) {
@@ -33,7 +33,7 @@ DivStack.prototype.addEventToDiv = function(container) {
 
 DivStack.prototype.appendNewDiv = function() {
   var newDiv;
-  var firstDiv = $(this.container).find('div:first');
+  var firstDiv = $(this.divSmall).first();
 
   if(firstDiv.length == 1) {
     var text = parseInt(firstDiv.text()) + 1;
