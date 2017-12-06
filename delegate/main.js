@@ -14,13 +14,13 @@ DivStack.prototype.createDiv = function(text) {
   });
 };
 
-DivStack.prototype.isFirstChild = function(target) {
-  return $(target).is($(target).parent().children(this.divSmall).first());
+DivStack.prototype.isFirstChild = function(element) {
+  return $(element).is($(element).parent().children(this.divSmall).first());
 };
 
 DivStack.prototype.addEventToDiv = function(container) {
   var _this = this;
-  $(container).on('click', this.divSmall, function(){
+  container.on('click', this.divSmall, function(){
     if(_this.isFirstChild(this)) {
       $(this).remove();
     } else {
