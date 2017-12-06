@@ -1,7 +1,8 @@
 function DivStack(data) {
-  this.container = data.container;
   this.divClass = data.divClass;
   this.addButton = data.addButton;
+  this.container = data.container;
+  this.divSmall = 'div.' + this.divClass;
   this.defaultBackground = data.defaultBackground;
   this.changeBackground = data.changeBackground;
 }
@@ -17,9 +18,9 @@ DivStack.prototype.isFirstChild = function(target) {
   return $(target).is($(target).parent().children('div').first());
 };
 
-DivStack.prototype.addEventToDiv = function(div) {
+DivStack.prototype.addEventToDiv = function(container) {
   var _this = this;
-  $(div).on('click', function(event){
+  $(container).on('click', this.divSmall, function(event){
     if(_this.isFirstChild(event.target)) {
       $(event.target).remove();
     } else {
@@ -43,20 +44,20 @@ DivStack.prototype.appendNewDiv = function() {
 };
 
 DivStack.prototype.init = function() {
-  this.addEventToDiv(this.container);
   var _this = this;
-  this.addButton.bind('click', function(){
+  this.addEventToDiv(this.container);
+  this.addButton.on('click', function(){
     _this.appendNewDiv();
   });
 };
 
 $(document).ready(function(){
   var data = {
-    container: $('.left'),
     divClass: 'small',
-    addButton: $('[data-trigger=add]'),
+    container: $('.left'),
+    changeBackground: 'cyan',
     defaultBackground: 'white',
-    changeBackground: 'cyan'
+    addButton: $('[data-trigger=add]')
   };
 
   var stack = new DivStack(data);
