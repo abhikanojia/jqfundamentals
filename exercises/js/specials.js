@@ -22,7 +22,7 @@ SpecialOffer.prototype.showOffer = function(key, $offercontainer) {
   $offercontainer.find('p').css({color: this.cache[key].color});
 };
 
-SpecialOffer.prototype.getData = function(key) {
+SpecialOffer.prototype.displayOffer = function(key) {
   var $offercontainer = $(this.offerContainerSelector);
   if(key) {
     this.showOffer(key, $offercontainer);
@@ -35,17 +35,13 @@ SpecialOffer.prototype.hideButton = function() {
   this.submitBtn.parent('li').hide();
 };
 
-SpecialOffer.prototype.createElement = function(type) {
-  return $(type);
-};
-
 SpecialOffer.prototype.appendOfferContainer = function() {
   $('<div/>', {
     class: 'special'
   }).insertAfter(this.formContainer)
-  .append(this.createElement('<h3/>'))
-  .append(this.createElement('<p/>'))
-  .append(this.createElement('<img/>'));
+  .append('<h3/>')
+  .append('<p/>')
+  .append('<img/>');
 };
 
 SpecialOffer.prototype.init = function() {
@@ -53,8 +49,8 @@ SpecialOffer.prototype.init = function() {
   this.hideButton();
   this.cacheDataFromJson();
   this.appendOfferContainer();
-  this.selectElement.bind('change', function(){
-    _this.getData(this.value);
+  this.selectElement.on('change', function(){
+    _this.displayOffer(this.value);
   });
 };
 
