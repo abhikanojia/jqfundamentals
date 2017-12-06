@@ -20,11 +20,11 @@ DivStack.prototype.isFirstChild = function(target) {
 
 DivStack.prototype.addEventToDiv = function(container) {
   var _this = this;
-  $(container).on('click', this.divSmall, function(event){
-    if(_this.isFirstChild(event.target)) {
-      $(event.target).remove();
+  $(container).on('click', this.divSmall, function(){
+    if(_this.isFirstChild(this)) {
+      $(this).remove();
     } else {
-      $(event.target).css({background: _this.changeBackground})
+      $(this).css({background: _this.changeBackground})
         .siblings()
         .css({background: _this.defaultBackground});
     }
